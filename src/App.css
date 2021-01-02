@@ -9,6 +9,7 @@
   font-size: calc(20px + 2vmin);
   font-family: Sansita;
   color: black;
+  margin-top: 10px;
 }
 
 
@@ -29,15 +30,16 @@
   
 }
 
-.menu li a{
+.menu li p{
   display: inline-block;
   padding: 15px 20px;
   position: relative;
-  color: #989EB9;
+  color: #888EA6;
   text-decoration: none;
+  margin: 0;
 }
 
-.menu li a:after{
+.menu li p:after{
   background: none repeat local 0 0 transparent;
   bottom: 0;
   content: "";
@@ -50,12 +52,12 @@
   width: 0;
 }
 
-.menu li a:focus{
+.menu li p.active{
   color: black;
   font-weight: 600;
 }
 
-.menu li a:focus:after{
+.menu li p.active:after{
   left: 23%;
   width: 50%;
 }
