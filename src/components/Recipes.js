@@ -1,10 +1,17 @@
 import React from 'react'
+import Card from './Card'
+import './Recipes.css'
 
 const Recipes = (props) => {
+
     return (
-    <div>
-coucou
-    </div>
+    <section className="recipes">
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+    </section>
     )
 }
 

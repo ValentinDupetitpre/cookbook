@@ -1,10 +1,13 @@
+html{  
+  background-color: #FFF7F3; 
+}
+
 .App {
   text-align: center;
   min-height: 100vh;
 }
 
 .App-header {
-  background-color: white; 
   align-items: center;
   font-size: calc(20px + 2vmin);
   font-family: Sansita;
@@ -23,11 +26,12 @@
   list-style: none;
   white-space: nowrap;
   overflow: scroll;
+  margin-bottom: 0;
 }
 
 .menu li{
-  margin: 0 10px 12px;
-  
+  margin: 0 0px 12px;
+  letter-spacing: 5px;
 }
 
 .menu li p{
@@ -47,7 +51,7 @@
   height: 5px;
   left: 50%;
   position: absolute;
-  background: #FFDFD3;
+  background: #A7D489 ;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
@@ -69,4 +73,10 @@
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* make scrollbar transparent */
+}
+
+.content{
+  background: -webkit-gradient(linear, bottom, top, from(#FFF7F3), to(#A7D489));
+  background: linear-gradient(#FFF7F3 0%, #A7D489 10%);
+  padding-top: 15px;
 }
