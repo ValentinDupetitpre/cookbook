@@ -1,62 +1,35 @@
+import React, {useState, useEffect} from 'react'
 import './App.css'
-import { useState, useEffect } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
+import search from './media/loupe.png'
+import filter from './media/filter.png'
+import back from './media/back.png'
+import Home from './components/Home'
+import AddRecipe from './components/AddRecipe'
 
-import Recipes from './components/Recipes'
-
-function App() {
-  const menu = ['Apéro', 'Entrée', 'Plat', 'Dessert']
-  const [lastActive, setLastActive] = useState('Apéro')
+const App = ({history}) => {
+  const [searching, setSearching] = useState(false)
+  const [isAdminPage, setIsAdminPage] = useState(false)
+  
+  const toggleSearch = () => setSearching(!searching)
 
   useEffect(()=> {
-    document.getElementById("Apéro").classList.add('active')
-  }, [])
-
-  const handleMenuClick = (item) => {
-    const link = document.getElementById(item)
-    if(lastActive) document.getElementById(lastActive).classList.remove("active")
-    link.classList.add('active')
-    setLastActive(item)
-    scrollToElement(link.parentElement)
-  }
-
-  const scrollToElement = (element) => {
-    const elementCenter = element.offsetLeft + element.offsetWidth/2
-    const distanceToScrollToRight = elementCenter - window.screen.width/2
-    const step = (distanceToScrollToRight - element.parentNode.scrollLeft)/10
-    const scrolling = setInterval(() => {
-      if(distanceToScrollToRight > element.parentNode.scrollLeft){
-        element.parentNode.scrollLeft += step
-      }else if(distanceToScrollToRight < element.parentNode.scrollLeft){
-        element.parentNode.scrollLeft -= Math.abs(step)
-      }
-
-      if((distanceToScrollToRight- element.parentNode.scrollLeft <= 10 && distanceToScrollToRight > element.parentNode.scrollLeft)
-        || (element.parentNode.scrollLeft - distanceToScrollToRight <= 10 && distanceToScrollToRight < element.parentNode.scrollLeft)
-        || element.parentNode.scrollLeft === 0 || element.parentNode.scrollWidth - element.parentNode.scrollLeft - window.screen.width <=1){
-        window.clearInterval(scrolling)
-      }
-    },25)
-  }
-
+    setIsAdminPage(window.location.href.includes("suggest"))
+  })
+  
   return (
     <div className="App">
-      <header className="App-header">
-        Hākari
+      <header className="app-header">
+        {!isAdminPage && <img className="header-button" src={filter} alt="filtre"/>}
+        {isAdminPage && <img className="header-button" src={back} alt="retour" onClick={() => history.goBack()}/> }
+        <h1>Hākari</h1>
+        {!isAdminPage && <img className="header-button right" onClick={() => toggleSearch()} src={search} alt="rechercher"/>}
       </header>
-      <section className="menu">
-        <ul>
-          { 
-            menu.map(item => <li key={item}><p href="#" key={item} onClick={() => handleMenuClick(item)} id={item}>{item}</p></li>)
-          }
-        </ul>
-      </section>
-      <section className="content">
-        <Switch>
-            <Route exact path="/" component={Recipes} />
-            {/* <Route exact path="/recipe/:recipeId" render={(props) => <Recipe {...props} />} /> */}
-        </Switch>
-      </section>
+      <Switch>
+        <Route exact path="/" component={() => <Home searching={searching}/>} />
+        <Route exact path="/suggest" component={AddRecipe} />
+        {/* <Route exact path="/recipe/:recipeId" render={(props) => <Recipe {...props} />} /> */}
+      </Switch>
     </div>
   );
 }

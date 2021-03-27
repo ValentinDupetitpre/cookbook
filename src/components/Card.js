@@ -2,7 +2,7 @@ import React from 'react'
 import {withRouter} from 'react-router-dom'
 import './Card.css'
 import Tag from './Tag'
-import picture from '../food.jpg'
+import picture from '../media/food.jpg'
 
 const Card = (props) => {
   // const picture = articleService.useTopPicture(props.id, 'main')

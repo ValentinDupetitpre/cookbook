@@ -1,0 +1,39 @@
+.add-ingredient{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: auto;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #A7D489;
+}
+
+.add-ingredient .add-button{
+    height: 25px;
+    margin-right: 10px;
+}
+
+.add-ingredient p{
+    margin: 0;
+}
+
+.add-recipe h4{
+    margin-bottom: 0;
+}
+
+.ingredients{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.ingredients .qte{
+    width: 20%;
+}
+
+.ingredients .name{
+    width: 45%;
+}

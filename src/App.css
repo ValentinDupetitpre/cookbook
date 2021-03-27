@@ -7,12 +7,31 @@ html{
   min-height: 100vh;
 }
 
-.App-header {
+.app-header{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-bottom: 25px;
+}
+
+.app-header h1{
   align-items: center;
-  font-size: calc(20px + 2vmin);
+  font-size: calc(20px + 5vmin);
   font-family: Sansita;
   color: black;
+  margin: 10px auto 0;
+}
+
+.app-header .header-button{
+  height: 30px;
+  width: 30px;
+  padding: 15px 15px;
+  position: absolute;
   margin-top: 10px;
+}
+
+.app-header .header-button.right{
+  right: 0;
 }
 
 
@@ -21,12 +40,31 @@ html{
   scroll-behavior: smooth;
 }
 
+.menu .searchbar{
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  width: 300px;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.menu .searchbar .input{
+  margin-left: 8px;
+  flex: 1;
+}
+
+.menu .searchbar .search{
+  padding: 10px;
+}
+
 .menu ul{
   display: flex;
   list-style: none;
   white-space: nowrap;
   overflow: scroll;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .menu li{
