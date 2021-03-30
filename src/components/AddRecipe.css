@@ -37,3 +37,7 @@
 .ingredients .name{
     width: 45%;
 }
+
+.ingredients .remove{
+    margin-top: 25px;
+}
