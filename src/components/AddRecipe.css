@@ -7,6 +7,7 @@
     padding: 5px;
     border-radius: 20px;
     background-color: #A7D489;
+    box-shadow: 1px 1px 2px black;
 }
 
 .add-ingredient .add-button{
@@ -22,7 +23,7 @@
     margin-bottom: 0;
 }
 
-.ingredients{
+.items{
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -30,14 +31,15 @@
     margin-bottom: 10px;
 }
 
-.ingredients .qte{
+.items .qte{
     width: 20%;
 }
 
-.ingredients .name{
+.items .name{
     width: 45%;
+    text-transform: capitalize;
 }
 
-.ingredients .remove{
+.items .remove{
     margin-top: 25px;
 }

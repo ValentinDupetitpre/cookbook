@@ -3,38 +3,100 @@ import React, { useState, useEffect } from 'react'
 import TextField from '@material-ui/core/TextField'
 import add from '../media/add.png'
 
-import Ingredient from './Ingredient'
+import ItemView from './ItemView'
 import './AddRecipe.css'
 
 
 const AddRecipe = (props) => {
     const [ingredients, setIngredients] = useState([{index: 0, quantite: 1, ingredient: ''}])
+    const [outils, setOutils] = useState([{index: 0, quantite: 1, outil: ''}])
+    const [instructions, setInstructions] = useState([{index: 0, instruction: ''}])
 
-    const handleChangeIngredients = (e) => {
-        
-        
-        if(['quantite','ingredient'].includes(e.target.name)){
-            let data = [...ingredients]
-            const rawId = e.target.id
-            const id = rawId.slice(rawId.indexOf('-') + 1)
-            data[id][e.target.name]=e.target.value
-        }else{
-            console.log("pas le bon champs")
+    const handleChangeItems = (e, item) => {
+        switch (item) {
+            case 'ingredient':
+                if(['quantite','ingredient'].includes(e.target.name)){
+                    let data = [...ingredients]
+                    const rawId = e.target.id
+                    const id = rawId.slice(rawId.indexOf('-') + 1)
+                    data[id][e.target.name]=e.target.value
+                }else{
+                    console.log("pas le bon champs")
+                }
+                break;
+            case 'outil':
+                if(['quantite','outil'].includes(e.target.name)){
+                    let data = [...outils]
+                    const rawId = e.target.id
+                    const id = rawId.slice(rawId.indexOf('-') + 1)
+                    data[id][e.target.name]=e.target.value
+                }else{
+                    console.log("pas le bon champs")
+                }
+                break;
+            case 'instruction':
+                if(['instruction'].includes(e.target.name)){
+                    let data = [...instructions]
+                    const rawId = e.target.id
+                    const id = rawId.slice(rawId.indexOf('-') + 1)
+                    data[id][e.target.name]=e.target.value
+                }else{
+                    console.log("pas le bon champs")
+                }
+                break;
+            default:
+                break;
         }
     }
 
-    const addIngredient = () => {
-        setIngredients(
-            (previousIngredients) => 
-                [
-                    ...previousIngredients, 
-                    {index: Math.random(), quantite: 1, ingredient: ''}
-                ]
-        )
+    const addIngredient = (item) => {
+        switch (item) {
+            case 'ingredient':
+                setIngredients(
+                    (previousIngredients) => 
+                        [
+                            ...previousIngredients, 
+                            {index: Math.random(), quantite: 1, ingredient: ''}
+                        ]
+                )
+                break;
+            case 'outil':
+                setOutils(
+                    (previousOutils) => 
+                        [
+                            ...previousOutils, 
+                            {index: Math.random(), quantite: 1, outil: ''}
+                        ]
+                )
+                break;
+            case 'instruction':
+                setInstructions(
+                    (previousInstructions) => 
+                        [
+                            ...previousInstructions,
+                            {index: Math.random(), instruction: ''}
+                        ]
+                )
+                break;
+            default:
+                break;
+        }
     }
 
-    const removeIngredient = (val) => {
-        setIngredients(ingredients.filter(item => item !== val))
+    const removeIngredient = (val, item) => {
+        switch (item) {
+            case 'ingredient':
+                setIngredients(ingredients.filter(item => item !== val))
+                break;
+            case 'outil':
+                setOutils(outils.filter(item => item !== val))
+                break;
+            case 'instruction':
+                setInstructions(instructions.filter(item => item !== val))
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -58,14 +120,32 @@ const AddRecipe = (props) => {
                     name="title"
                 />
                 <h4>Ingrédients</h4> 
-                <div onChange={handleChangeIngredients}>
-                    <Ingredient ingredients={ingredients} delete={removeIngredient}/>
+                <div onChange={(e) => handleChangeItems(e, 'ingredient')}>
+                    <ItemView array={ingredients} item="ingredient" delete={removeIngredient} multiline={false} />
                 </div>
-                <div className="add-ingredient" onClick={addIngredient}>
+                <div className="add-ingredient" onClick={() => addIngredient('ingredient')}>
                     <img className="add-button" src={add} alt="add" />
                     <p>Ajouter un ingrédient</p>
                 </div>
-
+                
+                <h4>Outils</h4>
+                <div onChange={(e) => handleChangeItems(e, 'outils')}>
+                    <ItemView array={outils} item="outil" delete={removeIngredient} multiline={false}/>
+                </div>
+                <div className="add-ingredient" onClick={() => addIngredient('outil')}>
+                    <img className="add-button" src={add} alt="add" />
+                    <p>Ajouter un outils</p>
+                </div>
+                <h4>Instructions</h4>
+                <div onChange={(e) => handleChangeItems(e, 'instructions')}>
+                    <ItemView array={instructions} item="instruction" delete={removeIngredient} multiline={true}/>
+                </div>
+                <div className="add-ingredient" onClick={() => addIngredient('instruction')}>
+                    <img className="add-button" src={add} alt="add" />
+                    <p>Ajouter une étape</p>
+                </div>
+                <h4>Parfait pour</h4>
+                <h4>Vignettes</h4>
                 <input type="submit" value="Envoyer"/>
             </form>
         </section>
